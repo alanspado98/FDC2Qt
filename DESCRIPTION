@@ -1,0 +1,40 @@
+Package: FDC2Qt
+Title: Streamflow Series Prediction through Regional Flow-Duration Curve   
+Version: 0.0.0.9000
+Authors@R: 
+    person("Alan", "Spadoni", email = "alan.spadoni2@unibo.it", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0007-2411-9507"))
+    person("Attilio", "Castellarin", email = "attilio.castellarin@unibo.it", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6111-0612"))
+Description: A system for 'declaratively' creating graphics,
+    based on "The Grammar of Graphics". You provide the data, tell 'ggplot2'
+    how to map variables to aesthetics, what graphical primitives to use,
+    and it takes care of the details.
+URL: https://github.com/
+BugReports: https://github.com//issues
+License: `use_gpl3_license()` 
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports: 
+    caTools (>= 1.18.3),
+    dplyr (>= 1.1.4),
+    lubridate (>= 1.9.4),
+    matlib (>= 1.0.0),
+    pracma (>= 2.4.4),
+    raster (>= 3.6.31),
+    rgrass (>= 0.5.1),
+    stringr (>= 1.5.1),
+    tibble (>= 3.2.1),
+    TTR (>= 0.24.4)
+Suggests: 
+    factoextra (>= 1.0.7),
+    ggplot2 (>= 3.5.1),
+    pals (>= 1.9),
+    plot.matrix (>= 1.6.2),
+    plotly (>= 4.10.4),
+    scales (>= 1.3.0),
+    viridis (>= 0.6.5)
+Depends: 
+    R (>= 2.10)
+LazyData: true
