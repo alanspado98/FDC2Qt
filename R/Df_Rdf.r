@@ -14,7 +14,7 @@ library(pals)
 setwd("..")
 setwd("..")
 #Check if we have hourly time step
-d_threshold<-as.numeric(read.csv("04_Metodo_Deflusso_Indice/04_4_Idrogramma_orario/Downscaling/Durata_soglia_Downscaling.csv",sep=";",dec=","))
+d_threshold<-
 file_names<-dir("04_Metodo_Deflusso_Indice/04_4_Idrogramma_orario/Downscaling/CSV_HH")
 #Caricamento del dataset delle portate medie giornaliere definitivo (Capitolo 2) per limare le serie di portata oraria delle sezioni che hanno una nuvola di punti Qcolomo/Qgg=f(Durata) sospetta
 QMG <- read.csv("02_Riempimento&Revisione_QMG/02_2_Revisione_QMG/Dataset_QMG_definitivo.csv",sep=";",dec=",",check.names = F)
