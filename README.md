@@ -10,7 +10,7 @@ This repository provides tools for predicting **hydrologically consistent stream
 ## Installation
 ```r
 # Install from GitHub
-devtools::install_github("username/repo")
+devtools::install_github("alanspado98/FDC2Qt")
 
 
 
