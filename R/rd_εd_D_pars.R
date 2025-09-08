@@ -1,14 +1,6 @@
 #Estimates of Peak-Duration curve and Reduction Ratio (Maione et. al, 2003)
 
-library(pals)
-library(lubridate)
-library(lmomRFA)
-library(ppcc)
-library(dplyr)
-library(png)
-library(pracma)
-
-rd_epsd_D_pars<-function(streamflows_HH,Df_target,d_threshold)
+rd_εd_D_pars<-function(streamflows_HH,Df_target,d_threshold)
 {
   if(length(which(is.na(streamflows_HH[,2])))>0) streamflows_HH<-streamflows_HH[-which(is.na(streamflows_HH[,3])),]
   Df_target<-30
