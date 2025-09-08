@@ -1,6 +1,6 @@
 # FDC2Qt <img src="man/figures/logo.png" align="right" height="120" />
 
-This repository provides tools for predicting **hydrologically consistent streamflow series** in ungauged basins using a **period-of-record flow duration curve**.
+This repository provides tools for predicting **hydrologically consistent streamflow series** in ungauged basins using **period-of-record flow duration curves**.
 
 ## Installation
 ```r
