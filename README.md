@@ -26,9 +26,9 @@ devtools::install_github("alanspado98/FDC2Qt")
 The author would like to thank prof. A. Castellarin (University of Bologna) for conceptualization and methodology, the Emilia-Romagna Regional Environmental Agency (ARPAE) for the dataset of the testing case study, and the Po River Basin Authority (AdBPo) and Emilia-Romagna Region (RER) for the financial support.  
 
 ## References
-Castellarin, A., Vogel, R. M. and Brath, A., 2004. A stochastic index flow model of flow duration curves. Water Resources Research, 40(3).
-Efroymson, M. A., 1960. Multiple Regression Analysis. In Mathematical Methods for Digital Computers, pp.191–203.
-Burn, D. H., 1990. Evaluation of Regional Flood Frequency Analysis With a Region of Influence Approach. Water Resources Research, 26(10), pp.2257–2265.
+Castellarin, A., Vogel, R. M. and Brath, A., 2004. A stochastic index flow model of flow duration curves. Water Resources Research, 40(3). <br>
+Efroymson, M. A., 1960. Multiple Regression Analysis. In Mathematical Methods for Digital Computers, pp.191–203.<br>
+Burn, D. H., 1990. Evaluation of Regional Flood Frequency Analysis With a Region of Influence Approach. Water Resources Research, 26(10), pp.2257–2265.<br>
 
 ## License:
 
