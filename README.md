@@ -4,9 +4,10 @@ Tool for generating **continuous streamflow series (Qt)** in ungauged basins usi
 
 ## Description
 **FDC2Qt** generates long and hydrologically consistent synthetic (daily and hourly) streamflow series in ungauged or scarcely gauged catchments.
-It takes as **input** morpho-climatic features of the gauged and ungauged catchments and hydrometric information of the gauged catchments: streamflows, mean annual flows, hourly stream stages, rating curves. It estimates observed streamflow series and validate them according to the precipitation eleasiticy of streamflow and the shape of the PORFDC.
-Its **methodology** consist in three steps:
-  1)  
+It takes as **input** morpho-climatic features of gauged and ungauged catchments and hydrometric information of gauged catchments (daily/hourly streamflows, mean annual flows, hourly stream stages, rating curves).
+Its **methodology** consist in three steps. For a given ungauged site:
+  1)  a regional POR-FDC is predicted as the product between the mean annual flow and a dimensionless FDC (*index-flow approach*, see Castellarin et al., WRR, 2004)
+      1.1) 
 
 ## Installation
 ```r
