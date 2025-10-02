@@ -34,6 +34,10 @@ devtools::install_github("alanspado98/FDC2Qt")
 ## Aknowledgments
 The author would like to thank prof. A. Castellarin (University of Bologna) for conceptualization and methodology, the Emilia-Romagna Regional Environmental Agency (ARPAE) for the dataset of the testing case study, and the Po River Basin Authority (AdBPo) and Emilia-Romagna Region (RER) for the financial support.  
 
+## License:
+
+## Contact:
+
 ## References
 Castellarin, A., Vogel, R. M. and Brath, A., 2004. A stochastic index flow model of flow duration curves. Water Resources Research, 40(3). <br>
 Efroymson, M. A., 1960. Multiple Regression Analysis. In Mathematical Methods for Digital Computers, pp.191–203.<br>
@@ -41,7 +45,3 @@ Burn, D. H., 1990. Evaluation of Regional Flood Frequency Analysis With a Region
 Smakhtin, V. Y., Hughes, D. A., Creuse-Naudin, E., 1997. Regionalization of Daily Flow Characteristics in Part of the Eastern Cape, South Africa. Hydrological Sciences Journal 42(6), pp.919–936.<br>
 Maione, U., Mignosa, P., Tomirotti, M., 2003. Regional estimation of synthetic design hydrographs. International Journal of River Basin Management, 1(2), pp.151–163. <br>
 Sankarasubramanian, A., Richard M. V., James F. L., 2001. Climate Elasticity of Streamflow in the United States. Water Resources Research, 37 (6), pp.1771–81 <br>
-
-## License:
-
-## Contact:
