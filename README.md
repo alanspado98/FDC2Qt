@@ -2,6 +2,8 @@
 
 Repository for predicting **hydrologically consistent streamflow series (daily and hourly)** in ungauged basins using **period-of-record flow duration curves**.
 
+## Description
+
 ## Installation
 ```r
 # Install from GitHub
