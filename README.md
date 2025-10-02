@@ -5,8 +5,8 @@ Tool for generating **continuous streamflow series (Qt)** in ungauged basins usi
 ## Description
 **FDC2Qt** generates long and hydrologically consistent synthetic (daily and hourly) streamflow series in ungauged or scarcely gauged catchments.<br>It takes as **input** morpho-climatic features of gauged and ungauged catchments and hydrometric information of gauged catchments (daily/hourly streamflows, mean annual flows, hourly stream stages, rating curves).<br>Its **methodology** consist in three key steps. In particular, for a given ungauged site it estimates:
   1.  a regional POR-FDC: product between mean annual flow and dimensionless FDC (*Index-Flow Approach*, Castellarin et al., 2004)<br>
-       1.1.  mean annual flow: multi-regression model based on basin morpho-climatic features (*Stepwise Regression Analysis*, Efroymson, 1960) <br>
-       1.2.  dimensionless FDC: weighted average of gauged-catchment FDCs, weights inversely       proportional to the hydrological distance with respect to the ungauged site (*Region-of-Influence Approach*, Burn, 1990)<br>
+       1. mean annual flow: multi-regression model based on basin morpho-climatic features (*Stepwise Regression Analysis*, Efroymson, 1960) <br>
+       2. dimensionless FDC: weighted average of gauged-catchment FDCs, weights inversely       proportional to the hydrological distance with respect to the ungauged site (*Region-of-Influence Approach*, Burn, 1990)<br>
 1. Elemento principale
     1. Sottoelemento 1
     2. Sottoelemento 2
