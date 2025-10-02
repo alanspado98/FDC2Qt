@@ -3,10 +3,12 @@
 Tool for generating **continuous streamflow series (Qt)** in ungauged basins using **period-of-record flow duration curves** (POR-**FDC**).
 
 ## Description
-**FDC2Qt** generates long and hydrologically consistent synthetic (daily and hourly) streamflow series in ungauged or scarcely gauged catchments.long-term average streamflow.<br>It takes as **input** morpho-climatic features of gauged and ungauged catchments and hydrometric information of gauged catchments (daily/hourly streamflows, mean annual flows, hourly stream stages, rating curves).
-Its **methodology** consist in three steps. For a given ungauged site:
-  1)  a regional POR-FDC is predicted as the product between the mean annual flow and a dimensionless FDC (*Index-Flow Approach*, see Castellarin et al., Water Resour. Res., 2004). The first is estimated by multi-regression model based on basin morpho-climatic features (*Stepwise Regression Analysis*, see Efroymson, Math. Methods Digit. Comput., 1960) while the second as a weighted average of dimensionless POR-FDC of gauged catchments, where weights are inversely proportional to the hydrological distance to the ungauged site (*Region-of-Influence Approach*, Burn, Water Resour. Res., 1990);
-  2)  
+**FDC2Qt** generates long and hydrologically consistent synthetic (daily and hourly) streamflow series in ungauged or scarcely gauged catchments.<br>It takes as **input** morpho-climatic features of gauged and ungauged catchments and hydrometric information of gauged catchments (daily/hourly streamflows, mean annual flows, hourly stream stages, rating curves).
+Its **methodology** consist in three key steps. In particular, for a given ungauged site it estimates:
+  1)  a regional POR-FDC: product between mean annual flow and dimensionless FDC (*Index-Flow Approach*, see Castellarin et al., Water Resour. Res., 2004)
+     1.1)  mean annual flow: multi-regression model based on basin morpho-climatic features (*Stepwise Regression Analysis*, see Efroymson, Math. Methods Digit. Comput., 1960)
+      1.2)  dimensionless FDC: weighted average of gauged-catchment FDCs, weights inversely proportional to the hydrological distance with respect to the ungauged site (*Region-of-Influence Approach*, Burn, Water Resour. Res., 1990)
+  2)
 
 ## Installation
 ```r
