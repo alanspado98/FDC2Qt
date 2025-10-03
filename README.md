@@ -34,9 +34,9 @@ devtools::install_github("alanspado98/FDC2Qt")
 ## Aknowledgments
 The author would like to thank prof. A. Castellarin (University of Bologna) for conceptualization and methodology, the Emilia-Romagna Regional Environmental Agency (ARPAE) for the dataset of the testing case study, and the Po River Basin Authority (AdBPo) and Emilia-Romagna Region (RER) for the financial support.  
 
-## License:
+## License
 
-## Contact:
+## Contact
 
 ## References
 Castellarin, A., Vogel, R. M. and Brath, A., 2004. A stochastic index flow model of flow duration curves. Water Resources Research, 40(3). <br>
