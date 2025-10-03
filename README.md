@@ -41,13 +41,24 @@ devtools::install_github("alanspado98/FDC2Qt")
 ```
 
 ## Usage
+After installing the package, load it in R:
 ```r
-# Install from GitHub
-devtools::install_github("alanspado98/FDC2Qt")
+library(FDC2Qt)
+
+# Example: estimate daily streamflow series from flow duration curves
+data(stream_stages)
+data(rating_curves)
+data(streamflows)
+data(basin_descriptors)
+
+# 
+
+# Visualize output
+plot(result)
 ```
 
 ## Aknowledgments
-The author want to thank prof. A. Castellarin (University of Bologna) for conceptualization and methodology, the Emilia-Romagna Regional Environmental Agency (ARPAE) for the dataset of the testing case study, and the Po River Basin Authority (AdBPo) and Emilia-Romagna Region (RER) for the financial support.  
+The author want to thank prof. A. Castellarin (University of Bologna) for conceptualization and methodology, the Emilia-Romagna Regional Environmental Agency (ARPAE) for the dataset of the testing case study, and the Po River Basin Authority (AdBPo) and Emilia-Romagna Region (RER) for the financial support.
 
 ## Contact
 * Alan Spadoni: alan.spadoni2@unibo.it
