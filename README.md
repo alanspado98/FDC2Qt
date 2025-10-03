@@ -3,7 +3,7 @@
 Tool for generating **continuous streamflow series (Qt)** in ungauged basins using **period-of-record flow duration curves** (POR-**FDC**).
 
 ## Description
-**FDC2Qt** generates hydrologically consistent synthetic streamflow series (daily/hourly) in ungauged or scarcely gauged catchments.<br>It takes as **input** morpho-climatic features of gauged and ungauged catchments and hydrometric information of gauged catchments (daily/hourly streamflows, mean annual flows, hourly stream stages, rating curves).<br>Its **methodology** consist in three key steps. In particular, for a given ungauged site it estimates:
+**FDC2Qt** generates hydrologically consistent synthetic streamflow series (daily/hourly) in ungauged or scarcely gauged catchments.<br>It takes as **input** morpho-climatic features of gauged and ungauged catchments and hydrometric information of gauged catchments (daily/hourly streamflows, mean annual flows, hourly stream stages, rating curves).<br>Its **methodology** consist in three key steps (see *Figure 1*). In particular, for a given ungauged site it estimates:
   1.  a regional POR-FDC: product between mean annual flow and dimensionless FDC (*Index-Flow Approach*; Castellarin et al., 2004)
        1. mean annual flow: multi-regression model based on basin morpho-climatic features (*Stepwise Regression Analysis*; Efroymson, 1960)
        2. dimensionless FDC: weighted average of gauged-catchment FDCs, weights inversely proportional to the hydrological distance with respect to the ungauged site (*Region-of-Influence Approach*; Burn, 1990)
@@ -23,7 +23,7 @@ Tool for generating **continuous streamflow series (Qt)** in ungauged basins usi
 </p>
 
 Auxiliary functions allow users to perform data quality assessment, by looking at precipitation elasticity of streamflows (Sankarasubramanian et al., 2001) and at the shape of empirical POR-FDCs. <br>     
-FDC2Qt was applied to 14 gauged catchments across the Emilia-Romagna region in Northern Italy. LOOCV of hydrological singatures across these sites demonstrates a good accurancy of synthetic daily streamflow series, while a perliminary test against a lumped rainfall-runoff model calibrated using the same regional POR-FDC indicate higher reliability of FDC2Qt hourly streamflow series, especially in flood events, confirming the validity of the downscaling procedure.
+FDC2Qt was applied to 14 gauged catchments across the Emilia-Romagna region in Northern Italy. LOOCV of hydrological singatures across these sites demonstrates a good accurancy of synthetic daily streamflow series, while a perliminary test against a lumped rainfall-runoff model calibrated using the same regional POR-FDC indicate higher reliability of FDC2Qt hourly streamflow series, especially in flood events, confirming the validity of the downscaling procedure (*Figure 2*).
 
 <p align="center">
   <img src="man/figures/LOOCV.png" height="170" />
@@ -31,8 +31,7 @@ FDC2Qt was applied to 14 gauged catchments across the Emilia-Romagna region in N
   <img src="man/figures/scatter_GR5H.png" height="170" />
   <img src="man/figures/scatter_FDC2Qt.png" height="170" />
   <br>
-  <em>Figure 2. Left: leave-one-out cross-validation of hydrological signatures across Emilia-Romagna catchments (Northern Italy): FDC2Qt predictions in blue, observations in black.<br>
-  Right</em>
+  <em>Figure 2. Left: leave-one-out cross-validation of hydrological signatures across Emilia-Romagna catchments (Northern Italy): FDC2Qt predictions in blue, observations in black. Right: </em>
 </p>
 
 ## Installation
