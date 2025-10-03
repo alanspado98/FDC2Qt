@@ -18,7 +18,7 @@ Tool for generating **continuous streamflow series (Qt)** in ungauged basins usi
      
 Auxiliary functions allow users to perform data quality assessment, by looking at precipitation elasticity of streamflows (Sankarasubramanian et al., 2001) and at the shape of empirical POR-FDCs. <br>     
 FDC2Qt was applied to 42 gauged catchments across the Emilia-Romagna region in Northern Italy. LOOCV of hydrological singatures across these sites demonstrates a good accurancy of synthetic daily streamflow series, while a perliminary test against a lumped rainfall-runoff model calibrated using the same regional POR-FDC indicate higher reliability of FDC2Qt hourly streamflow series, especially in flood events.
-
+<img src="man/figures/logo.png" align="right" height="120" />
 ## Installation
 ```r
 # Install from GitHub
