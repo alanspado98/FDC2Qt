@@ -19,7 +19,7 @@ Tool for generating **continuous streamflow series (Qt)** in ungauged basins usi
 <p align="center">
   <img src="man/figures/workflow.png" height="400" />
   <br>
-  <em>Figure 1 – Workflow of the package.</em>
+  <em>Figure 1. Workflow of the package.</em>
 </p>
 
 Auxiliary functions allow users to perform data quality assessment, by looking at precipitation elasticity of streamflows (Sankarasubramanian et al., 2001) and at the shape of empirical POR-FDCs. <br>     
