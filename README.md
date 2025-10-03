@@ -36,7 +36,10 @@ The author would like to thank prof. A. Castellarin (University of Bologna) for 
 
 ## License
 
+
 ## Contact
+* Alan Spadoni: alan.spadoni2@unibo.it
+* Attilio Castellarin: attilio.castellarin@unibo.it
 
 ## References
 Castellarin, A., Vogel, R. M. and Brath, A., 2004. A stochastic index flow model of flow duration curves. Water Resources Research, 40(3). <br>
