@@ -1,4 +1,4 @@
-# FDC2Qt <img src="man/figures/logo.png" align="right" height="120" />
+# FDC2Qt <img src="man/figures/logo.png" align="right" height="130" />
 
 Tool for generating **continuous streamflow series (Qt)** in ungauged basins using **period-of-record flow duration curves** (POR-**FDC**).
 
