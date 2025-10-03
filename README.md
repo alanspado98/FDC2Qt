@@ -34,9 +34,6 @@ devtools::install_github("alanspado98/FDC2Qt")
 ## Aknowledgments
 The author want to thank prof. A. Castellarin (University of Bologna) for conceptualization and methodology, the Emilia-Romagna Regional Environmental Agency (ARPAE) for the dataset of the testing case study, and the Po River Basin Authority (AdBPo) and Emilia-Romagna Region (RER) for the financial support.  
 
-## License
-MIT License
-
 ## Contact
 * Alan Spadoni: alan.spadoni2@unibo.it
 * Attilio Castellarin: attilio.castellarin@unibo.it
