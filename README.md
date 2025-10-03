@@ -17,7 +17,7 @@ Tool for generating **continuous streamflow series (Qt)** in ungauged basins usi
              4. hydrograph shape (Maione et al., 2003)
 
 <p align="center">
-  <img src="man/figures/workflow.png" height="400" />
+  <img src="man/figures/workflow.png" height="330" />
   <br>
   <em>Figure 1. Workflow of the package.</em>
 </p>
@@ -25,6 +25,11 @@ Tool for generating **continuous streamflow series (Qt)** in ungauged basins usi
 Auxiliary functions allow users to perform data quality assessment, by looking at precipitation elasticity of streamflows (Sankarasubramanian et al., 2001) and at the shape of empirical POR-FDCs. <br>     
 FDC2Qt was applied to 14 gauged catchments across the Emilia-Romagna region in Northern Italy. LOOCV of hydrological singatures across these sites demonstrates a good accurancy of synthetic daily streamflow series, while a perliminary test against a lumped rainfall-runoff model calibrated using the same regional POR-FDC indicate higher reliability of FDC2Qt hourly streamflow series, especially in flood events.
 
+<p align="left">
+  <img src="man/figures/LOOCV.png" height="200" />
+  <br>
+  <em>Table 1. Leave-one-out cross-validation of hydrological signatures across Emilia-Romagna catchments (Northern Italy): FDC2Qt predictions in blue, observations in black.</em>
+</p>
 
 ## Installation
 ```r
