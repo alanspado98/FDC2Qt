@@ -27,7 +27,7 @@ FDC2Qt was applied to 14 gauged catchments across the Emilia-Romagna region in N
 
 <p align="center">
   <img src="man/figures/LOOCV.png" height="150" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="man/figures/scatter_GR5H.png" height="150" />
   <img src="man/figures/scatter_FDC2Qt.png" height="150" />
   <br>
