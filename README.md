@@ -26,9 +26,9 @@ Auxiliary functions allow users to perform data quality assessment, by looking a
 FDC2Qt was applied to 14 gauged catchments across the Emilia-Romagna region in Northern Italy. LOOCV of hydrological singatures across these sites demonstrates a good accurancy of synthetic daily streamflow series, while a perliminary test against a lumped rainfall-runoff model calibrated using the same regional POR-FDC indicate higher reliability of FDC2Qt hourly streamflow series, especially in flood events, confirming the validity of the downscaling procedure (*Figure 2*).
 
 <p align="center">
-  <img src="man/figures/LOOCV.png" height="170" />
-  <img src="man/figures/scatter_GR5H.png" height="170" />
-  <img src="man/figures/scatter_FDC2Qt.png" height="170" />
+  <img src="man/figures/LOOCV.png" height="160" />
+  <img src="man/figures/scatter_GR5H.png" height="160" />
+  <img src="man/figures/scatter_FDC2Qt.png" height="160" />
   <br>
   <em>Figure 2. Table: leave-one-out cross-validation of hydrological signatures across Emilia-Romagna catchments (Northern Italy), FDC2Qt predictions in blue and observations in black. Scatterplots: accurancy of hourly streamflow predictions from GR5H and FDC2Qt, both derived from the same regional PORFDC.</em>
 </p>
