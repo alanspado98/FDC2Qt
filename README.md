@@ -49,7 +49,6 @@ data(stream_stages)
 data(rating_curves)
 data(streamflows)
 data(basin_descriptors)
-
 # 
 
 # Visualize output
