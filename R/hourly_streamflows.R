@@ -82,7 +82,7 @@ constrained_polynomial <- function(c)
 }  
 
 #' #' @export
-hourly_streamflows<-function(reg_daily_str,target_section,abc_Tc_pars,tau_Tc_pars,lambda_Tc_pars,Df_target,d_threshold)
+hourly_streamflows<-function(reg_daily_str,target_section,abc_Tc_pars,τ_Tc_pars,λs_Tc_pars,Df_target,d_threshold)
 {
   # Hydrograph calibration parameter
   w_V <- .5 #weight of volumes relative error (Flood volume constraint)
