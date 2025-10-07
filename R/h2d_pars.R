@@ -1,7 +1,7 @@
-#Hourly to daily peak ratio parameters
+#Hourly to daily peak ratio parameters as a function of time of concentration
 
 #Time of concentration, Tc (Giandotti, 1934)
-ToC_Giandotti<-function(descr)
+Time_of_Concentration<-function(descr)
 {
   tc<-round((4*sqrt(descr[,2])+1.5*descr[,3])/(0.8*sqrt(descr[,4]-descr[,5])),digits=2)
   names(tc)<-descr[,1]
@@ -47,7 +47,7 @@ h2d_pars<-function(streamflows_GG,streamflows_HH,basin_descriptors,target_sectio
   
   #Time of concentration estimates
   descriptors_tc<-basin_descriptors[,1:5]
-  ToC<-ToC_Giandotti(descriptors_tc)
+  ToC<-Time_of_Concentration(descriptors_tc)
     
   #Initialization of the exponential model parameter dataframe for fitting Qhh/Qd=a+b*exp(-c*duration)
   qq_d_pars<- data.frame(matrix(NA,nrow=length(basin_descriptors[,1]),ncol=4,dimnames=list(x=NULL,y=c("Name","a","b","c")))) 
@@ -156,6 +156,5 @@ h2d_pars<-function(streamflows_GG,streamflows_HH,basin_descriptors,target_sectio
   }
   
   # Save a list with functional relationships of a, b, c = f(Tc) and time of concnetration
-  h2d_pars_results <- list(abc_Tc_pars=abc_Tc_pars,ToC=ToC)
-  return(h2d_pars_results)
+  return(abc_Tc_pars)
 }

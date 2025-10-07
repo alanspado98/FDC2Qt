@@ -143,6 +143,3 @@ library(plot.matrix)
   availability_matrices <- list(stream_stages=ss_DA_matrix,rating_curves=rc_DA_matrix,streamflows=str_DA_matrix)
   return(availability_matrices)
 }
-
-availability_matrices_v2<-availability_matrices
-save(x=availability_matrices_v2,file="data/availability_matrices_v2.rda")
