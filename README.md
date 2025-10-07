@@ -44,15 +44,12 @@ After installing the package, load it in R:
 ```r
 library(FDC2Qt)
 
-# Example: estimate daily streamflow series from flow duration curves
+# Example: load input data
 data(stream_stages)
 data(rating_curves)
 data(streamflows)
 data(basin_descriptors)
 # 
-
-# Visualize output
-plot(result)
 ```
 
 ## Aknowledgments
