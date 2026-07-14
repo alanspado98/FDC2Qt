@@ -19,14 +19,15 @@ Toolkit for generating **continuous streamflow series (Qt)** in ungauged basins 
 <p align="center">
   <img src="man/figures/workflow.png" height="330" />
   <br>
-  <em>Figure 1. *FDC2Qt* workflow.</em>
+  <em>Figure 1. FDC2Qt workflow.</em>
 </p>
 
 Auxiliary functions allow users to perform data quality assessment, by looking at precipitation elasticity of streamflows (Sankarasubramanian et al., 2001) and at the shape of empirical POR-FDCs. <br>     
-FDC2Qt was applied to 26 gauged catchments across the Emilia-Romagna region in Northern Italy. LOOCV of hydrological singatures across these sites demonstrates a good accurancy of the predicted daily and hourly streamflows, while a  test against a lumped rainfall-runoff model calibrated using the same regional POR-FDC indicate higher reliability of FDC2Qt hourly streamflow series, especially in flood events, confirming the validity of the downscaling procedure (*Figure 2*).
+FDC2Qt was applied to 26 gauged catchments across the Emilia-Romagna region in Northern Italy. LOOCV of hydrological singatures across these sites demonstrates a good accurancy of the predicted daily and hourly streamflows (*Figure 2 a) and b)*), while a  test against a lumped rainfall-runoff model calibrated using the same regional POR-FDC indicate higher reliability of FDC2Qt hourly streamflow series, especially in flood events, confirming the validity of the downscaling procedure (*Figure 2 c)*).
 
 <p align="center">
-  <img src="man/figures/LOOCV.png" height="150" />
+  <img src="man/figures/LOOCV_FDCs.png" height="150" />
+  <img src="man/figures/LOOCV_flood_volumes.png" height="150" />
   <img src="man/figures/scatter_GR5H.png" height="150" />
   <img src="man/figures/scatter_FDC2Qt.png" height="150" />
   <br>
