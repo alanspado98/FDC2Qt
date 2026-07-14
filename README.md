@@ -36,7 +36,7 @@ FDC2Qt was applied to 26 gauged catchments across the Emilia-Romagna region in N
     <td align="center"><img src="man/figures/scatter_FDC2Qt.png" height="150" /></td>
   </tr>
     <tr>
-    <td colspan="2" align="center"><b>a)</b></td>
+    <td colspan="2" align="center"><b>c)</b></td>
   </tr>
 </table>
 <em>Figure 2. <b>(a)</b> Leave-one-out cross-validation of hydrological signatures across Emilia-Romagna catchments (Northern Italy), FDC2Qt predictions in blue and observations in black. <b>(b)</b> Accuracy of hourly streamflow predictions from GR5H and FDC2Qt, both derived from the same regional PORFDC.</em>
