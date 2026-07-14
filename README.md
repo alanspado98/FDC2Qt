@@ -28,8 +28,8 @@ FDC2Qt was applied to 26 gauged catchments across the Emilia-Romagna region in N
 <p align="center">
 <table align="center" border="0">
   <tr>
-    <td align="center"><br><img src="man/figures/LOOCV_FDCs.png" height="150" /><b>a)</b></td>
-    <td align="center"><br><img src="man/figures/LOOCV_flood_volumes.png" height="150" /><b>b)</b></td>
+    <td align="center"><br><img src="man/figures/LOOCV_FDCs.png" height="200" /><b>a)</b></td>
+    <td align="center"><br><img src="man/figures/LOOCV_flood_volumes.png" height="200" /><b>b)</b></td>
     <td align="center"><br><img src="man/figures/scatter_GR5H.png" height="150" /><b>c)</b></td>
     <td align="center"><br><img src="man/figures/scatter_FDC2Qt.png" height="150" /></td>
   </tr>
