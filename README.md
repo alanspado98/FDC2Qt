@@ -23,18 +23,19 @@ Toolkit for generating **continuous streamflow series (Qt)** in ungauged basins 
 </p>
 
 Auxiliary functions allow users to perform data quality assessment, by looking at precipitation elasticity of streamflows (Sankarasubramanian et al., 2001) and at the shape of empirical POR-FDCs. <br>     
-FDC2Qt was applied to 26 gauged catchments across the Emilia-Romagna region in Northern Italy. LOOCV of hydrological singatures across these sites demonstrates a good accurancy of the predicted daily and hourly streamflows (*Figure 2 a) and b)*), while a  test against a lumped rainfall-runoff model calibrated using the same regional POR-FDC indicate higher reliability of FDC2Qt hourly streamflow series, especially in flood events, confirming the validity of the downscaling procedure (*Figure 2 c)*).
+FDC2Qt was applied to 26 gauged catchments across the Emilia-Romagna region in Northern Italy. LOOCV of hydrological singatures across these sites demonstrates a good accurancy of the predicted daily and hourly streamflows (*Figure 2 a) and b)*), while a test against a lumped rainfall-runoff model calibrated using the same regional POR-FDC indicate higher reliability of FDC2Qt hourly streamflow series, especially in flood events, confirming the validity of the downscaling procedure (*Figure 2 c)*).
 
 <p align="center">
 <table align="center" border="0">
   <tr>
     <td align="center"><br><img src="man/figures/LOOCV_FDCs.png" height="150" /><b>a)</b></td>
-    <td align="center"><b>b)</b><br><img src="man/figures/LOOCV_flood_volumes.png" height="150" /></td>
-    <td align="center"><b>c)</b><br><img src="man/figures/scatter_GR5H.png" height="150" /></td>
-    <td align="center"><b>d)</b><br><img src="man/figures/scatter_FDC2Qt.png" height="150" /></td>
+    <td align="center"><br><img src="man/figures/LOOCV_flood_volumes.png" height="150" /><b>b)</b></td>
+    <td align="center"><br><img src="man/figures/scatter_GR5H.png" height="150" /><b>c)</b></td>
+    <td align="center"><br><img src="man/figures/scatter_FDC2Qt.png" height="150" /></td>
   </tr>
 </table>
-  <em>Figure 2. Table: leave-one-out cross-validation of hydrological signatures across Emilia-Romagna catchments (Northern Italy), FDC2Qt predictions in blue and observations in black. Scatterplots: accurancy of hourly streamflow predictions from GR5H and FDC2Qt, both derived from the same regional PORFDC.</em>
+  <em>Figure 2. FDC2Qt performance in leave-one-out cross-validation (26 catchments, Northern Italy): flow duration curves residuals (a), flood volumes (b) and hourly streamflow comparison against a rainfall-runoff model (c).
+  </em>
 </p>
 
 ## Installation
