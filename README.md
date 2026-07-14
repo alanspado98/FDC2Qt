@@ -42,20 +42,6 @@ FDC2Qt was applied to 26 gauged catchments across the Emilia-Romagna region in N
 <em>Figure 2. <b>(a)</b> Leave-one-out cross-validation of hydrological signatures across Emilia-Romagna catchments (Northern Italy), FDC2Qt predictions in blue and observations in black. <b>(b)</b> Accuracy of hourly streamflow predictions from GR5H and FDC2Qt, both derived from the same regional PORFDC.</em>
 </p>
 
-<p align="center">
-<table align="center" border="0">
-  <tr>
-    <td align="center"><b>a)</b><br><img src="man/figures/LOOCV_FDCs.png" width="300" /></td>
-    <td align="center"><b>b)</b><br><img src="man/figures/LOOCV_flood_volumes.png" width="300" /></td>
-  </tr>
-  <tr>
-    <td align="center"><b>c)</b><br><img src="man/figures/scatter_GR5H.png" height="150" /></td>
-    <td align="center"><b>d)</b><br><img src="man/figures/scatter_FDC2Qt.png" height="150" /></td>
-  </tr>
-</table>
-<em>Figure 2. FDC2Qt performance in leave-one-out cross-validation (26 catchments, Northern Italy): flow duration curves residuals (a), flood volumes (b) and hourly streamflow comparison against a rainfall-runoff model (c).
-</p>
-
 ## Installation
 ```r
 # Install from GitHub
