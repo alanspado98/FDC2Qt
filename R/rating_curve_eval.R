@@ -1,39 +1,46 @@
 #' Rating Curve Evaluation
-#' 
-#' @param hydro_levels 
 #'
-#' @param rc_name 
+#' Generates at-site streamflow estimates by applying the stage–discharge
+#' relationship to observed stream stages.
+#'
+#' @param stream_stages A zoo time series. Time index is of class `Date` or
+#'    `POSIXct`. The list names represent site names
+#'
+#' @param rating_curves A six column-data frame: station name (`character`),
+#'   start date of applicability and end date of applicability (`Date`or`POSIXct`),
+#'   minimum and maximum applicable stage (`numeric`), rating curve equation
+#'  (`character`)
+#'
+#' @return A zoo time series of the computed streamflows
 #'
 #' @export
 
-rating_curve_eval<-function(hydro_levels,rc_name)
+rating_curve_eval<-function(stream_stages,rating_curves)
 {
-  streamflows<-hydro_levels
-  streamflows[,2]<-NA
-  
-  hydro_levels<-hydro_levels[!is.na(hydro_levels[,2]),]#Remove NA streamflows
-  
-  datetime_indexes<-c(1,which(diff.POSIXt(rc_name$StartDate)!=0)+1)
-  
-  for(datetime_index in datetime_indexes)
+  #Streamflow series inizialization
+  streamflows <- zoo::zoo(rep(NA,length(stream_stages)), order.by = time(stream_stages))
+
+  stream_stages<-stream_stages[!is.na(stream_stages[,2])]#Remove NA stream stages
+
+  indeces<-c(1,which(diff.POSIXt(rating_curves[,2])!=0)+1)
+
+  for(i in indeces)
   {
-    hl_t<-hydro_levels[hydro_levels[,1]>=rc_name[datetime_index,2] & hydro_levels[,1]<rc_name[datetime_index,3],]
-    rc_name_datetime<-rc_name[rc_name[,2]%in%rc_name[datetime_index,2],]
-    
-    if(length(hl_t[,1])>0)
+    stages_i<-stream_stages[time(stream_stages)>=rating_curves[i,2] &
+                          time(stream_stages)<rating_curves[i,3],]
+    if(length(stages_i)>0)
     {
-      for(value_index in 1:length(rc_name_datetime[,1])) #Hydrometric level interval
+      rating_i<-rating_curves[rating_curves[,2]%in%rating_curves[i,2],]
+      for(j in 1:length(rating_i[,1])) #stages intervals of the rating curves
       {
-        hl_t_l<-hl_t[hl_t[,2]>=rc_name_datetime[value_index,4] & hl_t[,2]<rc_name_datetime[value_index,5],]
-        if(length(hl_t_l[,1])>0)
+        stages_ij<-stages_i[stages_i>=rating_i[j,4] & stages_i<rating_i[j,5],]
+        if(length(stages_ij)>0)
         {
-          X<-hl_t_l[,2]
-          streamflows[streamflows[,1]%in%hl_t_l[,1],2]<-eval(parse(text=rc_name_datetime[value_index,6]))
+          X<-stages_ij
+          streamflows[time(streamflows)%in%time(stages_ij)]<-eval(parse(text=rating_i[j,6]))
         }
       }
     }
   }
   return(streamflows)
 }
-
-  

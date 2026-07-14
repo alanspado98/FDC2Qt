@@ -1,69 +1,72 @@
-#' Dataset: North-Eastern Italy hydrometric-level data 
+#' Dataset: North-Eastern Italy stream stages
 #'
-#' Hourly and semi-hourly stream stages of some Emilia-Romagna region
-#' gauged cross-sections from 1986 to 2021; values are expressed in meters 
-#' above a zero level specific to each cross-section 
+#' Hourly and semi-hourly stream stages of some gauged cross-sections in
+#' Emilia-Romagna region from 1986 to 2021; values are expressed in meters
+#' above a zero level (specific to each cross-section)
 #'
-#' @format ## `stream_stages`
-#' A data frame with 11,608,248 rows and 3 columns:
+#' @format A named list of 28 time series, where the names correspond to cross-
+#' section names. Each element is a \code{zoo} object with:
 #' \describe{
-#'   \item{Name}{Cross-section name (character, "River@@Location" format)}
-#'   \item{Datetime}{Measurement date and time (character, "%Y-%m-%d %H:%M" format)}
-#'   \item{Value_m}{Hydrometric-level values (numeric)}
-#'#' }
+#'   \item{index}{Date and time (POSIXct)}
+#'   \item{value}{Stream stages (numeric)}
+#' }
 #' @source https://simc.arpae.it/dext3r/
 "stream_stages"
 
 #' Dataset: North-Eastern Italy rating-curves
 #'
-#' Hydrometric-level to streamflow equations of Emilia-Romagna region
-#' gauged cross-sections from 1986 to 2021; hydrometric levels are expressed 
-#' in meters, streamflows in cubic meters per second 
-#' 
-#' @format ## `rating_curves`
-#' A data frame with 2,420 rows and 6 columns:
+#' Stream stage to streamflow equations of gauged cross-sections in Emilia-
+#' Romagna region from 1986 to 2021; hydrometric levels are expressed in meters,
+#' streamflows in cubic meters per second
+#'
+#' @format A data frame with 2,420 rows and 6 columns:
 #' \describe{
-#'   \item{Name}{Cross-section name (character,"Location" format)}
-#'   \item{StartDate}{Starting validity period (character, "%Y-%m-%d %H:%M:%S" format)}
-#'   \item{EndDate}{Ending validity period (character, "%Y-%m-%d %H:%M:%S" format)}
-#'   \item{LowerLevel_m}{Lower validity level (numeric)}
-#'   \item{UpperLevel_m}{Upper validity level (numeric)}
+#'   \item{Name}{Cross-section name (character)}
+#'   \item{StartDate}{Starting validity period (POSIXct)}
+#'   \item{EndDate}{Ending validity period (POSIXct)}
+#'   \item{LowerLevel}{Lower validity level (numeric)}
+#'   \item{UpperLevel}{Upper validity level (numeric)}
 #'   \item{UserDefinedEquation}{Equation definition (character)}
 #' }
 #' @source https://www.arpae.it/it/temi-ambientali/meteo/report-meteo/annali-idrologici
 "rating_curves"
 
 #' Dataset: North-Eastern Italy streamflow data
-#' 
-#' Daily streamflow of some Emilia-Romagna region gauged cross-sections
-#' from 1921 to 2022; values are expressed in cubic
-#' meters per second
 #'
-#' @format ## `streamflows`
-#' A data frame with 107,321 rows and 3 columns:
+#' Daily streamflow of some Emilia-Romagna region gauged cross-sections
+#' from 1921 to 2022; values are expressed in cubic meters per second
+#'
+#' @format A named list of 8 time series, where the names correspond to cross-
+#' section names. Each element is a \code{zoo} object with:
 #' \describe{
-#'   \item{Name}{Cross-section name (character, "River@@Location" format)}
-#'   \item{Datetime}{Measurement date and time (character, "%Y-%m-%d" format)}
-#'   \item{Values_m3/s}{Streamflow values (numeric)}
+#'   \item{index}{Date and time (POSIXct)}
+#'   \item{value}{Streamflows (numeric)}
 #' }
 #' @source https://simc.arpae.it/dext3r/
 "streamflows"
 
-#' Dataset: North-Eastern Italy mean annual precipitation data 
+#' Dataset: North-Eastern Italy mean annual precipitation data
 #'
 #' Mean annual precipitation of some Emilia-Romagna region gauged basins
 #' from 2000 to 2021; values are expressed in millimetrs
 #'
-#' @format ## `annual_precipitation`
-#' A data frame with 11,608,248 rows and 3 columns:
+#' @format A named list of 15 time series, where the names correspond to cross-
+#' section names. Each element is a \code{zoo} object with:
 #' \describe{
-#'   \item{Name}{Basin cross-section name (character, "River@@Location" format)}
-#'   \item{2001}{Mean annual values of each basins in 2001 (numeric)}
-#'   \item{2002}{Mean annual values of each basins in 2002 (numeric)}
-#'   ...
+#'   \item{index}{Year (numeric)}
+#'   \item{value}{Total annual precipitation (numeric)}
 #'#' }
 #' @source https://simc.arpae.it/dext3r/
 "annual_precipitation"
+
+#' @format
+#' A data frame with 11 rows and 2 columns:
+#' \describe{
+#'   \item{Name}{Basin cross-section name (character)}
+#'   \item{Value}{Long-term average daily streamflow (numeric)}
+#'#' }
+#' @source https://www.arpae.it/it/temi-ambientali/meteo/report-meteo/annali-idrologici
+"mean_annual_flows"
 
 #' Dataset: North-Eastern Italy Basin Descriptors
 #'
@@ -72,74 +75,75 @@
 #'
 #' @format A data frame with multiple rows and 68 variables:
 #' \describe{
-#'   \item{Name}{Corss-section name (character,"River@@Location" format)}
-#'   \item{Area_km2}{Basin area in square kilometers (numeric)}
-#'   \item{CentroidEst_m}{Easting coordinate of the basin centroid in meters (numeric)}
-#'   \item{CentroidNorth_m}{Northing coordinate of the basin centroid in meters (numeric)}
-#'   \item{MeanElevation_masl}{Mean elevation of the basin in meters above sea level (numeric)}
-#'   \item{LongestDrainagePathLength_km}{Length of the longest drainage path in kilometers (numeric)}
-#'   \item{DrainageDensity_1/km}{Drainage density in inverse kilometers (numeric)}
-#'   \item{MaxElevation_masl}{Maximum elevation in meters above sea level (numeric)}
-#'   \item{MinElevation_masl}{Minimum elevation in meters above sea level (numeric)}
-#'   \item{HypsographicCurve2.5%_masl}{Elevation at 2.5% of the hypsographic curve (numeric)}
-#'   \item{HypsographicCurve5%_masl}{Elevation at 5% of the hypsographic curve (numeric)}
-#'   \item{HypsographicCurve10%_masl}{Elevation at 10% of the hypsographic curve (numeric)}
-#'   \item{HypsographicCurve25%_masl}{Elevation at 25% of the hypsographic curve (numeric)}
-#'   \item{HypsographicCurve50%_masl}{Elevation at 50% of the hypsographic curve (numeric)}
-#'   \item{HypsographicCurve75%_masl}{Elevation at 75% of the hypsographic curve (numeric)}
-#'   \item{HypsographicCurve90%_masl}{Elevation at 90% of the hypsographic curve (numeric)}
-#'   \item{HypsographicCurve95%_masl}{Elevation at 95% of the hypsographic curve (numeric)}
-#'   \item{HypsographicCurve97.5%_masl}{Elevation at 97.5% of the hypsographic curve (numeric)}
-#'   \item{MainChannelLength_km}{Length of the main channel in kilometers (numeric)}
-#'   \item{MeanSlopeLDP_%}{Mean slope along the longest drainage path in percentage (numeric)}
-#'   \item{CentroidOutletVectorLength_km}{Vector length from centroid to outlet in kilometers (numeric)}
-#'   \item{Orientation_degr}{Basin orientation in degrees (numeric)}
-#'   \item{MeanSlope1_%}{Mean slope of type 1 in percentage (numeric)}
-#'   \item{MeanSlope2_%}{Mean slope of type 2 in percentage (numeric)}
-#'   \item{MeanAspect_degr}{Mean aspect in degrees (numeric)}
-#'   \item{ElongationRatio}{Elongation Ratio (numeric)}
-#'   \item{ShapeFactor}{Shape factor (numeric)}
-#'   \item{MeanWidthFunction}{Mean width function value (numeric)}
-#'   \item{VarWidthFunction}{Variance of the width function (numeric)}
-#'   \item{SkewWidthFunction}{Skewness of the width function (numeric)}
-#'   \item{KurtoWidthFunction}{Kurtosis of the width function (numeric)}
-#'   \item{MeanHillslopeLength_km}{Mean hillslope length in kilometers (numeric)}
-#'   \item{TopologicalDiameter_km}{Topological diameter in kilometers (numeric)}
-#'   \item{1stOrderStreams}{Number of first-order streams (integer)}
-#'   \item{2ndOrderStreams}{Number of second-order streams (integer)}
-#'   \item{3rdOrderStreams}{Number of third-order streams (integer)}
-#'   \item{BifurcationRatio}{Bifurcation ratio of stream orders (numeric)}
-#'   \item{StreamLengthRatio}{Stream length ratio (numeric)}
-#'   \item{DrainageAreaRatio}{Drainage area ratio (numeric)}
-#'   \item{StreamSlopeRatio}{Stream slope ratio (numeric)}
-#'   \item{WidthFunction5%_m}{Width function at 5% in meters (numeric)}
-#'   \item{WidthFunction10%_m}{Width function at 10% in meters (numeric)}
-#'   \item{WidthFunction15%_m}{Width function at 15% in meters (numeric)}
-#'   \item{WidthFunction30%_m}{Width function at 30% in meters (numeric)}
-#'   \item{WidthFunction40%_m}{Width function at 40% in meters (numeric)}
-#'   \item{WidthFunction50%_m}{Width function at 50% in meters (numeric)}
-#'   \item{WidthFunction60%_m}{Width function at 60% in meters (numeric)}
-#'   \item{WidthFunction70%_m}{Width function at 70% in meters (numeric)}
-#'   \item{WidthFunction85%_m}{Width function at 85% in meters (numeric)}
-#'   \item{WidthFunction95%_m}{Width function at 95% in meters (numeric)}
-#'   \item{1stOrderStreamLengths_km}{Mean length of first-order streams in kilometers (numeric)}
-#'   \item{2ndOrderStreamLengths_km}{Mean length of second-order streams in kilometers (numeric)}
-#'   \item{3rdOrderStreamLengths_km}{Mean length of third-order streams in kilometers (numeric)}
-#'   \item{1stOrderDrainageAreas_km2}{Drainage area of first-order streams in square kilometers (numeric)}
-#'   \item{2ndOrderDrainageAreas_km2}{Drainage area of second-order streams in square kilometers (numeric)}
-#'   \item{3rdOrderDrainageAreas_km2}{Drainage area of third-order streams in square kilometers (numeric)}
-#'   \item{1stOrderStreamSlopes_%}{Slope of first-order streams in percentage (numeric)}
-#'   \item{2ndOrderStreamSlopes_%}{Slope of second-order streams in percentage (numeric)}
-#'   \item{3rdOrderStreamSlopes_%}{Slope of third-order streams in percentage (numeric)}
-#'   \item{TotalStreamLength_km}{Total stream length in kilometers (numeric)}
-#'   \item{MeanTopographicIndex}{Mean of the topographic index (numeric)}
-#'   \item{StDevTopographicIndex}{Standard deviation of the topographic index (numeric)}
-#'   \item{MeanMAPLast20_mm}{Mean annual precipitation over the last 20 years in millimeters (numeric)}
-#'   \item{StDevMAPLast20_mm}{Standard deviation of annual precipitation over the last 20 years in millimeters (numeric)}
-#'   \item{MeanMAPELast20_mm}{Mean annual potential evapotranspiration over the last 20 years in millimeters (numeric)}
-#'   \item{StDevMAPELast20_mm}{Standard deviation of annual potential evapotranspiration over the last 20 years in millimeters (numeric)}
-#'   \item{MeanMAAELast20_mm}{Mean annual actual evapotranspiration over the last 20 years in millimeters (numeric)}
-#'   \item{StDevMAEELast20_mm}{Standard deviation of annual actual evapotranspiration over the last 20 years in millimeters (numeric)}
+#'   \item{name}{Corss-section name (character,"River@@Location" format)}
+#'   \item{area}{Basin area in square kilometers (numeric)}
+#'   \item{LMC}{Length of the main channel in kilometers (numeric)}
+#'   \item{elev_mean}{Mean elevation of the basin in meters above sea level (numeric)}
+#'   \item{elev_closure}{elevattion of the closure section in meters above sea level (numeric)}
+#'   \item{x_g}{Easting coordinate of the basin centroid in meters (numeric)}
+#'   \item{y_g}{Northing coordinate of the basin centroid in meters (numeric)}
+#'   \item{LLDP}{Length of the longest drainage path in kilometers (numeric)}
+#'   \item{drain_dens}{Drainage density in inverse kilometers (numeric)}
+#'   \item{elev_max}{Maximum elevation in meters above sea level (numeric)}
+#'   \item{elev_min}{Minimum elevation in meters above sea level (numeric)}
+#'   \item{elev_2.5}{Elevation at 2.5% of the hypsographic curve (numeric)}
+#'   \item{elev_5}{Elevation at 5% of the hypsographic curve (numeric)}
+#'   \item{elev_10}{Elevation at 10% of the hypsographic curve (numeric)}
+#'   \item{elev_25}{Elevation at 25% of the hypsographic curve (numeric)}
+#'   \item{elev_50}{Elevation at 50% of the hypsographic curve (numeric)}
+#'   \item{elev_75}{Elevation at 75% of the hypsographic curve (numeric)}
+#'   \item{elev_90}{Elevation at 90% of the hypsographic curve (numeric)}
+#'   \item{elev_95}{Elevation at 95% of the hypsographic curve (numeric)}
+#'   \item{elev_97.5}{Elevation at 97.5% of the hypsographic curve (numeric)}
+#'   \item{LLDP_slope}{Mean slope along the longest drainage path in percentage (numeric)}
+#'   \item{dir_length}{Vector length from centroid to outlet in kilometers (numeric)}
+#'   \item{orient}{Basin orientation in degrees (numeric)}
+#'   \item{slope1}{Mean slope of type 1 in percentage (numeric)}
+#'   \item{slope2}{Mean slope of type 2 in percentage (numeric)}
+#'   \item{aspect}{Mean aspect in degrees (numeric)}
+#'   \item{elong_r}{Elongation Ratio (numeric)}
+#'   \item{shape_f}{Shape factor (numeric)}
+#'   \item{width_mean}{Mean width function value (numeric)}
+#'   \item{width_var}{Variance of the width function (numeric)}
+#'   \item{width_skw{Skewness of the width function (numeric)}
+#'   \item{width_kur}{Kurtosis of the width function (numeric)}
+#'   \item{MHL}{Mean hillslope length in kilometers (numeric)}
+#'   \item{topo_d}{Topological diameter in kilometers (numeric)}
+#'   \item{HS_num_1}{Number of first-order streams (integer)}
+#'   \item{HS_num_2}{Number of second-order streams (integer)}
+#'   \item{HS_num_3}{Number of third-order streams (integer)}
+#'   \item{R_b}{Bifurcation ratio of stream orders (numeric)}
+#'   \item{R_l}{Stream length ratio (numeric)}
+#'   \item{R_a}{Drainage area ratio (numeric)}
+#'   \item{R_s}{Stream slope ratio (numeric)}
+#'   \item{width_5}{Width function at 5% in meters (numeric)}
+#'   \item{width_10}{Width function at 10% in meters (numeric)}
+#'   \item{width_15}{Width function at 15% in meters (numeric)}
+#'   \item{width_30}{Width function at 30% in meters (numeric)}
+#'   \item{width_40}{Width function at 40% in meters (numeric)}
+#'   \item{width_50}{Width function at 50% in meters (numeric)}
+#'   \item{width_60}{Width function at 60% in meters (numeric)}
+#'   \item{width70}{Width function at 70% in meters (numeric)}
+#'   \item{width_85}{Width function at 85% in meters (numeric)}
+#'   \item{width_95}{Width function at 95% in meters (numeric)}
+#'   \item{HS_length_1}{Mean length of first-order streams in kilometers (numeric)}
+#'   \item{HS_length_2}{Mean length of second-order streams in kilometers (numeric)}
+#'   \item{HS_length_3}{Mean length of third-order streams in kilometers (numeric)}
+#'   \item{HS_area_1}{Drainage area of first-order streams in square kilometers (numeric)}
+#'   \item{HS_area_2}{Drainage area of second-order streams in square kilometers (numeric)}
+#'   \item{HS_area_3}{Drainage area of third-order streams in square kilometers (numeric)}
+#'   \item{HS_slope_1}{Slope of first-order streams in percentage (numeric)}
+#'   \item{HS_slope_2}{Slope of second-order streams in percentage (numeric)}
+#'   \item{HS_slope_3}{Slope of third-order streams in percentage (numeric)}
+#'   \item{TSL}{Total stream length in kilometers (numeric)}
+#'   \item{TI_mean}{Mean of the topographic index (numeric)}
+#'   \item{TI_sd}{Standard deviation of the topographic index (numeric)}
+#'   \item{MAP}{Mean annual precipitation over the last 20 years in millimeters (numeric)}
+#'   \item{MAP_sd}{Standard deviation of annual precipitation over the last 20 years in millimeters (numeric)}
+#'   \item{MAPE}{Mean annual potential evapotranspiration over the last 20 years in millimeters (numeric)}
+#'   \item{MAPE_sd}{Standard deviation of annual potential evapotranspiration over the last 20 years in millimeters (numeric)}
+#'   \item{MAEE}{Mean annual actual evapotranspiration over the last 20 years in millimeters (numeric)}
+#'   \item{MAEE_sd}{Standard deviation of annual actual evapotranspiration over the last 20 years in millimeters (numeric)}
 #' }
 #' @source #Morphological descriptors
 #'         https://www.academia.edu/5241352/Atlante_bacini_piemontesi_LR
