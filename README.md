@@ -14,12 +14,12 @@ Toolkit for generating **continuous streamflow series (Qt)** in ungauged basins 
              1. hydrograph continuity
              2. daily flood volumes
              3. hourly flood peak
-             4. hydrograph shape (Maione et al., 2003)
+             4. synthetic design hydrograph (Maione et al., 2003)
 
 <p align="center">
   <img src="man/figures/workflow.png" height="330" />
   <br>
-  <em>Figure 1. Workflow of the package.</em>
+  <em>Figure 1. *FDC2Qt* workflow.</em>
 </p>
 
 Auxiliary functions allow users to perform data quality assessment, by looking at precipitation elasticity of streamflows (Sankarasubramanian et al., 2001) and at the shape of empirical POR-FDCs. <br>     
