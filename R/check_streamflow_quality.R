@@ -1,161 +1,177 @@
-#' @export
-#2 reviews based on:
-# - Climate elasticity of streamflows
-#Visto il clima caldo temperato dell'area di indagine, valori tipici di elasticita' sono positivi e non
-# superiori a 5. Si rimuovono quindi gli anni delle stazioni che non rispettano questa regola.
-# - PORFDC trends
+#' Streamflow Quality Check
+#'
+#' Computes climate elasticity of streamflows and period-of-record flow duration
+#' cyrve (POR-FDC) in order to remove years or sites that exhibit unphysical behavior
+#'
+#' @param daily_streamflows A named list of zoo time series. Each element must be a
+#'     zoo object whose time index is of class `Date` or `POSIXct`. The list names
+#'     represent site names
+#'
+#' @param annual_precipitations A named list of zoo time series. Each element must be
+#'    a zoo object whose time index is of class `numeric`. The list names represent
+#'     site names
+#'
+#' @param lower,upper values of type `numeric` representing typical bounds of the
+#'    climate elasticity in the study area
+#'
+#' @return A list of two zoo time series: hourly and daily streamflows.
+#'
+#' @examples Assuming you have loaded daily streamflows and annual precipitation
+#' lists of catchments located in a warm temperate climate
+#' streamflows_check<-check_streamflow_quality(daily_streamflows,hourly_streamflows,
+#'                                             annual_precipitations,annual_precipitation,
+#'                                             lower=0,upper=5)
+#'
+#' Removal based on climate elasticity is performed automatically based on lower and
+#' upper precipitation elasticity bounds
+#'
+#' Sites removal based on POR-FDC trend is performed manually by the user, based on
+#' the computed number of inflection points of log(Q)=f(duration)
+#'
+#' #Access streamflow series
+#' streamflows_check$hourly
+#' streamflows_check$daily
+#'
 
-#' Title
-#'
-#' @param mean_annual_precipitation 
-#' @param LowerElasticity 
-#' @param UpperElasticity 
-#'
-#' @return
-#' @export
-#'
-#' @examples
-
-check_streamflow_quality<-function(streamflows_GG,streamflows_HH,annual_precipitation,LowerElasticity,UpperElasticity) 
+#Years in common
+years_in_common<-function(x,y)
 {
-  ##check 1: precipitation elsticity of streamflows
-  `%>%` <- magrittr::`%>%`
-  
-  #MAF evaluation
-  sites_to_remove<-c()#removal of sites with less then 5 years
-  for(r in unique(streamflows_GG[,1]))
-  {
-    if(length(unique(lubridate::year(streamflows_GG$Datetime[streamflows_GG$Name%in%r])))<5)
-      sites_to_remove<-append(sites_to_remove,r)
-  }
-  if(length(sites_to_remove)>0) streamflows_GG<-streamflows_GG[-which(streamflows_GG$Name%in%sites_to_remove),]  
-    
-  mean_annual_streamflows<-streamflows_GG %>%
-    dplyr::group_by(Name =Name, Year = lubridate::year(Datetime)) %>%
-    dplyr::summarise(Value = mean(Value, na.rm = TRUE),.groups="drop") %>%
-    as.data.frame()
-  
-  MAP<-annual_precipitations
-  MAS<-mean_annual_streamflows
-  
-  #Remove NA values
-  if(length(which(is.na(MAS[,3])))>0) MAS<-MAS[-which(is.na(MAS[,3])),]
-  if(length(which(is.na(MAP[,3])))>0) MAP<-MAP[-which(is.na(MAP[,3])),]
-  
-  #Common sections
-  MAS<-MAS[MAS[,1]%in%unique(MAP[,1]),]
-  MAP<-MAP[MAP[,1]%in%unique(MAS[,1]),]
+  if(inherits(time(x[[1]]),c("Date","POSIXct","POSIXt")) &&
+     !inherits(time(y[[1]]),c("Date","POSIXct","POSIXt")))
+    x_in_y <- Map(function(x, y) x %in% y, lapply(lapply(x,time),lubridate::year),
+                  lapply(y,time))
+  else
+    x_in_y <- Map(function(x, y) x %in% y, lapply(x,time), lapply(y,time))
 
-  #MAP sorting with the respect to MAS 
-  MAP<-MAP[order(factor(MAP[,1],levels=unique(MAS[,1]))),]
-  
-  #Common years
-  index_MAS<-NULL;index_MAP<-NULL
-  for(r in unique(MAS[,1]))
+  x_kept <- Map(function(x, mask) x[mask], x, x_in_y)
+  return(x_kept)
+}
+
+
+#Prompts for user removal descriptors
+ask_which_descriptor <- function(prompt = "Which site/s?:")
+{
+  repeat
   {
-    index_MAS<-append(index_MAS,which(!MAS[MAS[,1]%in%r,2]%in%MAP[MAP[,1]%in%r,2])+which(MAS[,1]%in%r)[1]-1)
-    index_MAP<-append(index_MAP,which(!MAP[MAP[,1]%in%r,2]%in%MAS[MAS[,1]%in%r,2])+which(MAP[,1]%in%r)[1]-1)
+    response <- trimws(readline(prompt))
+    response <- strsplit(response,",")[[1]]
+    if(length(which(response %in% names(flow_duration_curves)))>0) return(response)
+    else cat("Invalid input. Please enter the proper descriptor/s name/s.\n")
   }
-  if(length(index_MAS)>0) MAS<-MAS[-index_MAS,]
-  if(length(index_MAP)>0) MAP<-MAP[-index_MAP,]
-  
-  #Unique dataset with MAP, MAS and elasticity
-  #
-  loop=T
-  attempt_1<-list(MAS=MAS,MAP=MAP)
-  attempt_2<-list(MAS=MAS,MAP=MAP)
+}
+ask_yes_no <- function(prompt = "Do you want to delete one of these sites?[Y/N]:")
+{
+  repeat
+  {
+    response <- toupper(trimws(readline(prompt)))
+    if(response %in% c("Y", "N")) return(response)
+    else cat("Invalid input. Please enter 'Y' or 'N'.\n")
+  }
+}
+
+#' @export
+check_streamflow_quality<-function(daily_streamflows,hourly_streamflows,
+                                   annual_precipitations,lower,upper)
+{
+  #Annual flows evaluation
+  #removal of sites with less then 5 years
+  count_years<-function(x) length(unique(lubridate::year(time(x))))
+  daily_streamflows <- daily_streamflows[lapply(daily_streamflows,count_years)>=5]
+  annual_flows_eval<-function(x) aggregate(x,lubridate::year,mean,na.rm=T)
+  annual_flows<-lapply(daily_streamflows,annual_flows_eval)
+
+  #Remove NA values
+  annual_flows <- lapply(annual_flows,function(x) x[!is.na(x)])
+  annual_precipitations <- lapply(annual_precipitations,function(x) x[!is.na(x)])
+
+  #Sites in common
+  annual_flows<-annual_flows[names(annual_precipitations)]
+  annual_precipitations<-annual_precipitations[names(annual_flows)]
+  annual_flows<-years_in_common(annual_flows,annual_precipitations)
+  annual_precipitations<-years_in_common(annual_precipitations,annual_flows)
+
+
+  #Check #1: Precipitation elasticity of streamflows
+  loop<-T;lengths_sites<-0#initial conditions
   while(loop)
   {
-    attempt<-prec_elasticity(attempt_2$MAS,attempt_2$MAP,LowerElasticity,UpperElasticity)
-    attempt_1<-attempt_2
-    attempt_2<-attempt
-    if(dim(attempt_1$MAS)[1]==dim(attempt_2$MAS)[1]) loop=F
-  }
-  LT_MAS<-attempt$LT_MAS
-  Elasticity<-attempt$Elasticity
-  
-  index_to_keep<-c()
-  for(r in unique(Elasticity[,1]))
-  {
-    index_to_keep<-append(index_to_keep,
-                          which(lubridate::year(streamflows_GG[streamflows_GG[,1]%in%r,2])%in%
-                                  Elasticity[Elasticity[,1]%in%r,2])+which(streamflows_GG[,1]%in%r)[1]-1)
-  }
-  
-  streamflows_GG    <- streamflows_GG[index_to_keep,]
-  streamflows_HH    <- streamflows_HH[which(paste(streamflows_HH[,1],substring(streamflows_HH[,2],1,10),sep=" ")
-                                  %in%paste(streamflows_GG[,1],streamflows_GG[,2],sep=" ")),]
-  
-  
-  
-  ##check 2: number of inflection points in the logarithmic period of record
-
-  log_streamflows_GG<-streamflows_GG
-  log_streamflows_GG[,3]<-log(streamflows_GG[,3])
-  if(length(which(log_streamflows_GG[,3]==-Inf))>0) log_streamflows_GG<-log_streamflows_GG[-which(log_streamflows_GG[,3]==-Inf),]
-  
-  #Definition of same number of points of each PORFDC
-  p_inf<--Inf
-  p_sup<-Inf
-  N<--Inf
-  for(r in unique(log_streamflows_GG[,1]))
-  {
-    str_r<-log_streamflows_GG[log_streamflows_GG[,1]%in%r,]
-    p=c(1,length(str_r[,1]))/(length(str_r[,1])+1)
-    if(p[1]>p_inf) p_inf<-p[1] 
-    if(p[2]<p_sup) p_sup<-p[2] 
-    if(length(str_r[,1])>N) N<-length(str_r[,1])
-  }
-  p_0<-1:N/(N+1)
-  
-  p_0<-p_0[which(p_0>p_inf & p_0<p_sup)]
-  
-  #evaluation of inflection points (change of sign in the second derivative)
-  change_sign<-data.frame(Name=unique(log_streamflows_GG[,1]),Value=rep(NA,length(unique(log_streamflows_GG[,1]))))
-  for(r in unique(log_streamflows_GG[,1]))
-  {
-    str_r<-log_streamflows_GG[log_streamflows_GG[,1]%in%r,]
-    
-    p=1:length(str_r[,1])/(length(str_r[,1])+1)
-    Q=sort(log_streamflows_GG[log_streamflows_GG[,1]%in%r,3],decreasing = T)
-    Q<-approx(x=p,y=Q,xout=p_0,method="linear")$y
-    
-    # Compute first derivative (slope)
-    dy_dx <- diff(Q) / diff(p_0)
-    
-    #smooth_dy_dx<-caTools::runquantile(dy_dx,150,probs = 0.5,type=7,endrule="NA")
-    # Compute second derivative (rate of slope change)
-    d2y_d2x <- diff(dy_dx) / diff(p_0[-1]) 
-  }
-  index_cs<-which(change_sign[,2]>N/2)
-  if(length(index_cs)>0) 
-  {
-    cat("Error:\nPORFDCs with too many inflection points\n",paste(change_sign[index_cs,1],collapse="\n"))
-    ask_yes_no <- function(prompt = "Do you want to delete these sections?[Y/N]:") 
+    attempt<-prec_elasticity_eval(annual_flows,
+                                  annual_precipitations,
+                                  lower,upper)
+    if(!identical(lengths_sites,lengths(attempt$flows)))
     {
-      repeat {
-        response <- toupper(trimws(readline(prompt)))
-        
-        if (response %in% c("Y", "N")) {
-          return(response)
-        } else {
-          cat("Invalid input. Please enter 'Y' or 'N'.\n")
-        }
-      }
-    }
-    user_input<-ask_yes_no()
-    if(user_input=="Y") 
-    {  
-      streamflows_GG<- streamflows_GG[-which(streamflows_GG[,1]%in%change_sign[index_cs,1]),]
-      streamflows_HH<- streamflows_HH[-which(streamflows_HH[,1]%in%change_sign[index_cs,1]),]
-      LT_MAS     <- LT_MAS[-index_cs,]
-    }
+      annual_flows<-attempt$flows;annual_flows<-annual_flows[lengths(annual_flows)>=5]
+
+      annual_precipitations<-attempt$precipitations;annual_precipitations<-
+        annual_precipitations[lengths(annual_precipitations)>=5]
+
+      lengths_sites<-lengths(annual_flows)
+    }else loop<-F
   }
-  
+  elasticities<-attempt$elasticities
+  cat("Precipitation elasticities of streamflows:\n")
+  print(lapply(elasticities,function(x) round(x,digits = 2)))
+
+  #Mask hourly and daily streamflow series according to precipitation elasticity check
+  #Sites in common
+  daily_streamflows<-daily_streamflows[which(names(daily_streamflows)%in%
+                                         names(elasticities))]
+  hourly_streamflows<-hourly_streamflows[which(names(hourly_streamflows)%in%
+                                          names(elasticities))]
+  #Years in common
+  daily_streamflows<-years_in_common(daily_streamflows,elasticities)
+  hourly_streamflows<-years_in_common(hourly_streamflows,elasticities)
+
+
+  #Check #2: number of inflection points in the logarithmic POR-FDC
+  daily_streamflows_log<-lapply(daily_streamflows,log)
+  daily_streamflows_log<-Map(function(x, mask) x[mask],
+                        daily_streamflows_log,lapply(daily_streamflows_log,is.finite))
+
+  #Uniforming PORFDCs: same vector of durations
+  n<-max(lengths(daily_streamflows_log))#number of points
+  p_inf<-1/(1+min(lengths(daily_streamflows_log)))#lower bound of durations
+  p_sup<-min(lengths(daily_streamflows_log))/
+          (1+min(lengths(daily_streamflows_log)))#upper bound for durations
+  p_0  <-1:n/(n+1)#lower bound for durations
+  p_0<-p_0[p_0>=p_inf&p_0<=p_sup]
+
+  #Evaluation of period of record flow duration curve
+  flow_duration_curves<-lapply(daily_streamflows_log,porfdc_eval)
+  #porfdc computed at same durations
+  n_inflection_points<-c()
+  for(s in names(flow_duration_curves))
+  {
+    #change of sign in the second derivative
+    porfdc_unif<-approx(x = time(flow_duration_curves[[s]]),#unifromed
+                       y = flow_duration_curves[[s]],
+                       xout = p_0 ,method="linear")$y
+    dy_dx <- diff(porfdc_unif) / diff(p_0)# Compute first derivative
+    d2y_d2x <- diff(dy_dx) / diff(p_0[-1])# Compute second derivative
+    n_inflection_points<-append(n_inflection_points,
+                                length(which(diff(sign(d2y_d2x))!=0)))#Number of inflection points
+  }
+  names(n_inflection_points)<-names(flow_duration_curves)
+
+  cat("Number of inflection points: \n")
+  print(n_inflection_points)
+
+  for(s in names(flow_duration_curves))#plot
+  {
+    plot(flow_duration_curves[[s]],main=s,lwd=2,
+         xlab="duration (-)",ylab=expression(paste("streamflow (",m^3,"/s)",sep="")))
+    grid()
+  }
+  user_input_1<-ask_yes_no() #to user: sites removal?
+  if(user_input=="Y")
+  {
+    user_input_2<-ask_which_descriptor()#to user: which site/s?
+    daily_streamflows<- daily_streamflows[!names(daily_streamflows)%in%user_input_2]
+    hourly_streamflows<- hourly_streamflows[!names(hourly_streamflows)%in%user_input_2]
+  }
+
   # Store all dataframes inside a list
-  streamflows_check <- list(HH=streamflows_HH,
-                            GG=streamflows_GG,
-                            LT=rbind.data.frame(LT_MAS,streamflows[["LT"]]))
-  
-  return(streamflows_check)
+  output <- list(hourly=hourly_streamflows,
+                 daily=daily_streamflows)
+  return(output)
 }
