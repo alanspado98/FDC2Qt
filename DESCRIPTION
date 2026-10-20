@@ -1,5 +1,5 @@
 Package: FDC2Qt
-Title: Synthetic Streamflow Series Generation through a Regional Regression Tool based on Flow-Duration Curves
+Title: Synthetic Streamflow Series Generation through a Regional Regression Tool based on Flow-Duration Curves 
 Version: 0.0.0.9000
 Authors@R: 
     person("Alan", "Spadoni", email = "alan.spadoni2@unibo.it", role = c("aut", "cre"),
@@ -26,27 +26,26 @@ Description: Generates hydrologically consistent synthetic daily and hourly
     the hydrograph (Maione et al., 2003).
 URL: https://github.com/alanspado98/FDC2Qt
 BugReports: https://github.com/alanspado98/FDC2Qt/issues
-License: `use_mit_license()`
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
     caTools (>= 1.18.3),
     ggplot2 (>= 3.5.1),
-    ggrepel (>= 0.9.8),
-    ggspatial (>= 1.1.11),
+    ggrepel (>= 0.9.6),
+    ggspatial (>= 0.9.6),
     graphics,
     grDevices,
     lubridate (>= 1.9.4),
-    patchwork (>= 1.3.2),
+    patchwork (>= 1.2.0),
     pracma (>= 2.4.4),
-    robustbase (>= 0.99.7),
-    rworldmap ( >=1.3.8),
+    robustbase (>= 0.99.4),
+    rworldmap (>= 1.3.8),
     scales (>= 1.3.0),
-    sf (>= 1.1.3),
+    sf (>= 1.0.20),
     stats,
     stringr (>= 1.5.1),
-    zoo (>= 1.9.1)
+    zoo (>= 1.8.13)
 Depends: 
     R (>= 4.3.2)
 LazyData: true

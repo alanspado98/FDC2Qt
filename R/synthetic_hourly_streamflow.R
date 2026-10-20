@@ -229,7 +229,7 @@ synthetic_hourly_streamflow<-function(syn_daily_streamflows,porfdc,target="Marec
     }
     if(k==1) syn_hourly_streamflows<-hourlyflows_k#First group of consecutive years
     if(k>1) syn_hourly_streamflows<-c(syn_hourly_streamflows,hourlyflows_k)#Second groups of consecutive years
-    }
+  }
 
   #regional hourly streamflow object
   return(syn_hourly_streamflows)

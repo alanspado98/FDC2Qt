@@ -98,7 +98,7 @@ regional_porfdc<-function(daily_streamflows,basin_descriptors,target,psi)
                           #associated to duration=0
                           regional_porfdc,
                           c(1,min(porfdcs[,length(porfdcs[1,])],na.rm=T)))#maximum regional streamflow
-                          #associated to duration=1
+  #associated to duration=1
 
   # Store dimensionless period-of-record flow duration curve for the target site
   #and duration

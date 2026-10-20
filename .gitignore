@@ -1,6 +1,14 @@
 .Rproj.user
 .Rhistory
+<<<<<<< HEAD
 .RData
 .httr-oauth
 .DS_Store
 .quarto
+=======
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto
+.RData
+>>>>>>> ff88b9333b2f9d3084bfef93f68cf804a084fd01
